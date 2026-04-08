@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allah Waly Foods (Pvt.) Limited</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #D72B2B;
+    --gold: #F5C518;
+    --cyan: #00B4D8;
+    --navy: #0A0F1C;
+    --dark: #10131F;
+    --card-bg: #141828;
+    --white: #F8F4EF;
+    --light-gray: #B0B8C8;
+    --glass: rgba(255,255,255,0.04);
+    --glow-red: 0 0 30px rgba(215,43,43,0.4);
+    --glow-gold: 0 0 30px rgba(245,197,24,0.4);
+    --glow-cyan: 0 0 30px rgba(0,180,216,0.3);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.1s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 40px; height: 40px;
+    border: 1px solid var(--cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: all 0.15s ease;
+  }
+
+  /* ========= NAVBAR ========= */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(10,15,28,0.85);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(245,197,24,0.15);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .nav-logo img { height: 56px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: var(--glow-gold); }
+  .nav-brand { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--gold); line-height: 1.2; }
+  .nav-brand span { display: block; font-size: 0.7rem; color: var(--cyan); font-family: 'Cormorant Garamond', serif; letter-spacing: 3px; text-transform: uppercase; font-weight: 300; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { color: var(--light-gray); text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ========= HERO ========= */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 120px 60px 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(215,43,43,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(0,180,216,0.1) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 80%, rgba(245,197,24,0.08) 0%, transparent 60%);
+    animation: bgPulse 6s ease-in-out infinite alternate;
+  }
+  @keyframes bgPulse {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(245,197,24,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(245,197,24,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    max-width: 1300px; width: 100%;
+  }
+  .hero-text { animation: slideLeft 1s ease forwards; opacity: 0; }
+  @keyframes slideLeft { from { opacity:0; transform: translateX(-50px); } to { opacity:1; transform: translateX(0); } }
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--red), #8B0000);
+    color: var(--white); font-size: 0.7rem;
+    letter-spacing: 3px; text-transform: uppercase;
+    padding: 6px 18px; border-radius: 2px;
+    margin-bottom: 24px;
+    box-shadow: var(--glow-red);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900; line-height: 1.05;
+    background: linear-gradient(135deg, var(--white) 0%, var(--gold) 50%, var(--white) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .hero-subtitle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem; letter-spacing: 8px; color: var(--cyan);
+    margin-bottom: 28px;
+  }
+  .hero-desc {
+    font-size: 1.1rem; color: var(--light-gray); line-height: 1.8; max-width: 500px;
+    font-style: italic; margin-bottom: 40px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 14px 36px; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--red), #8B0000);
+    color: var(--white); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase;
+    font-family: 'Cormorant Garamond', serif;
+    text-decoration: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: all 0.3s; box-shadow: var(--glow-red);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(215,43,43,0.6); }
+  .btn-outline {
+    padding: 14px 36px; border: 1px solid var(--gold); cursor: pointer;
+    background: transparent; color: var(--gold); font-size: 0.8rem;
+    letter-spacing: 3px; text-transform: uppercase;
+    font-family: 'Cormorant Garamond', serif;
+    text-decoration: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { background: var(--gold); color: var(--navy); transform: translateY(-3px); box-shadow: var(--glow-gold); }
+
+  .hero-logo-3d {
+    animation: slideRight 1s ease forwards 0.3s; opacity: 0;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  @keyframes slideRight { from { opacity:0; transform: translateX(50px); } to { opacity:1; transform: translateX(0); } }
+  .logo-container {
+    position: relative; width: 380px; height: 380px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-ring {
+    position: absolute; inset: 0; border-radius: 50%;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--dark), var(--dark)) padding-box,
+                linear-gradient(135deg, var(--gold), var(--red), var(--cyan)) border-box;
+    animation: rotateSlow 8s linear infinite;
+  }
+  .logo-ring-2 {
+    position: absolute; inset: 20px; border-radius: 50%;
+    border: 1px solid rgba(245,197,24,0.2);
+    animation: rotateSlow 12s linear infinite reverse;
+  }
+  @keyframes rotateSlow { to { transform: rotate(360deg); } }
+  .logo-glow {
+    position: absolute; inset: 40px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(215,43,43,0.15), rgba(0,180,216,0.1), transparent);
+    animation: glowPulse 3s ease-in-out infinite alternate;
+  }
+  @keyframes glowPulse { from { opacity:0.5; transform:scale(0.95); } to { opacity:1; transform:scale(1.05); } }
+  .logo-img {
+    position: relative; z-index: 2;
+    width: 280px; height: 280px; object-fit: contain;
+    border-radius: 50%; padding: 20px;
+    filter: drop-shadow(0 0 20px rgba(245,197,24,0.4));
+    animation: floatLogo 4s ease-in-out infinite;
+  }
+  @keyframes floatLogo { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-15px);} }
+
+  /* stats */
+  .stats-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(10,15,28,0.9); backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(245,197,24,0.15);
+    display: flex; justify-content: center; gap: 0;
+  }
+  .stat-item {
+    flex: 1; max-width: 240px; padding: 24px 30px;
+    border-right: 1px solid rgba(245,197,24,0.1);
+    text-align: center;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'Bebas Neue'; font-size: 2.5rem; color: var(--gold); display: block; }
+  .stat-label { font-size: 0.7rem; letter-spacing: 2px; color: var(--light-gray); text-transform: uppercase; }
+
+  /* ========= SECTION BASE ========= */
+  section { padding: 120px 60px; }
+  .section-tag {
+    font-size: 0.7rem; letter-spacing: 4px; color: var(--cyan);
+    text-transform: uppercase; margin-bottom: 16px; display: block;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 700; line-height: 1.1; margin-bottom: 20px;
+  }
+  .section-title .accent { color: var(--gold); }
+  .section-desc { color: var(--light-gray); font-size: 1.1rem; line-height: 1.8; max-width: 600px; }
+
+  /* ========= ABOUT ========= */
+  #about { background: var(--dark); position: relative; overflow: hidden; }
+  #about::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,197,24,0.06), transparent 70%);
+  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; position: relative; }
+  .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .about-card {
+    background: var(--glass); border: 1px solid rgba(245,197,24,0.1);
+    padding: 28px; border-radius: 4px;
+    transition: all 0.4s;
+    position: relative; overflow: hidden;
+  }
+  .about-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--red), var(--gold));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .about-card:hover::before { transform: scaleX(1); }
+  .about-card:hover { background: rgba(245,197,24,0.05); transform: translateY(-4px); border-color: rgba(245,197,24,0.25); }
+  .about-card-icon { font-size: 2rem; margin-bottom: 12px; }
+  .about-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--gold); margin-bottom: 8px; }
+  .about-card p { font-size: 0.9rem; color: var(--light-gray); line-height: 1.6; }
+
+  /* ========= CERTIFICATES ========= */
+  #certificates { background: var(--navy); position: relative; }
+  .cert-header { max-width: 1200px; margin: 0 auto 60px; }
+  .cert-filter {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px;
+  }
+  .filter-btn {
+    padding: 8px 24px; border: 1px solid rgba(245,197,24,0.25);
+    background: transparent; color: var(--light-gray);
+    font-family: 'Cormorant Garamond', serif; font-size: 0.85rem;
+    letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+    transition: all 0.3s; border-radius: 2px;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--gold); color: var(--navy); border-color: var(--gold);
+  }
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px; max-width: 1300px; margin: 0 auto;
+  }
+  .cert-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px; overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25,0.8,0.25,1);
+    position: relative;
+    cursor: pointer;
+  }
+  .cert-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    border-color: rgba(245,197,24,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), var(--glow-gold);
+  }
+  .cert-card-header {
+    padding: 20px 24px 16px;
+    display: flex; align-items: center; gap: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .cert-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+  }
+  .cert-icon.red { background: rgba(215,43,43,0.15); border: 1px solid rgba(215,43,43,0.3); }
+  .cert-icon.gold { background: rgba(245,197,24,0.1); border: 1px solid rgba(245,197,24,0.3); }
+  .cert-icon.cyan { background: rgba(0,180,216,0.1); border: 1px solid rgba(0,180,216,0.3); }
+  .cert-icon.green { background: rgba(0,200,100,0.1); border: 1px solid rgba(0,200,100,0.3); }
+  .cert-meta { flex: 1; }
+  .cert-meta h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--white); margin-bottom: 4px; }
+  .cert-meta span { font-size: 0.75rem; color: var(--light-gray); letter-spacing: 1px; text-transform: uppercase; }
+  .cert-status {
+    padding: 4px 12px; border-radius: 20px; font-size: 0.65rem;
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+  }
+  .cert-status.active { background: rgba(0,200,100,0.15); color: #00C864; border: 1px solid rgba(0,200,100,0.3); }
+  .cert-status.valid { background: rgba(245,197,24,0.1); color: var(--gold); border: 1px solid rgba(245,197,24,0.3); }
+  .cert-body { padding: 20px 24px; }
+  .cert-row { display: flex; justify-content: space-between; margin-bottom: 10px; align-items: flex-start; }
+  .cert-row:last-child { margin-bottom: 0; }
+  .cert-key { font-size: 0.75rem; color: var(--light-gray); letter-spacing: 1px; text-transform: uppercase; }
+  .cert-val { font-size: 0.85rem; color: var(--white); text-align: right; max-width: 55%; }
+  .cert-footer {
+    padding: 14px 24px;
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cert-issuer { font-size: 0.7rem; color: var(--light-gray); }
+  .cert-view-btn {
+    font-size: 0.7rem; color: var(--cyan); letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer; border: none; background: none;
+    transition: color 0.3s;
+  }
+  .cert-view-btn:hover { color: var(--gold); }
+
+  /* cert top accent line */
+  .cert-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .cert-card.red-accent::before { background: linear-gradient(90deg, var(--red), transparent); }
+  .cert-card.gold-accent::before { background: linear-gradient(90deg, var(--gold), transparent); }
+  .cert-card.cyan-accent::before { background: linear-gradient(90deg, var(--cyan), transparent); }
+  .cert-card.green-accent::before { background: linear-gradient(90deg, #00C864, transparent); }
+
+  /* ========= EXPERIENCE TIMELINE ========= */
+  #experience { background: var(--dark); }
+  .exp-inner { max-width: 900px; margin: 0 auto; }
+  .exp-header { margin-bottom: 60px; }
+  .timeline { position: relative; padding-left: 40px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(180deg, var(--red), var(--gold), var(--cyan));
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 48px;
+    animation: fadeInUp 0.6s ease forwards; opacity: 0;
+  }
+  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+  .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+  .timeline-dot {
+    position: absolute; left: -47px; top: 16px;
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--dark);
+    box-shadow: var(--glow-gold);
+  }
+  .timeline-card {
+    background: var(--card-bg); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px; padding: 28px 32px;
+    transition: all 0.3s;
+  }
+  .timeline-card:hover { border-color: rgba(245,197,24,0.25); transform: translateX(8px); }
+  .timeline-period {
+    font-size: 0.7rem; letter-spacing: 3px; color: var(--cyan);
+    text-transform: uppercase; margin-bottom: 10px; display: block;
+  }
+  .timeline-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 6px; }
+  .timeline-org { font-size: 0.9rem; color: var(--light-gray); margin-bottom: 14px; }
+  .timeline-desc { font-size: 0.95rem; color: var(--light-gray); line-height: 1.7; font-style: italic; }
+  .timeline-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  .tag {
+    padding: 4px 14px; border-radius: 20px; font-size: 0.7rem;
+    letter-spacing: 1px; text-transform: uppercase;
+    border: 1px solid rgba(245,197,24,0.25); color: var(--gold); background: rgba(245,197,24,0.05);
+  }
+
+  /* ========= COMPLIANCE SECTION ========= */
+  #compliance { background: var(--navy); }
+  .compliance-inner { max-width: 1200px; margin: 0 auto; }
+  .compliance-header { margin-bottom: 60px; }
+  .compliance-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+  .compliance-card {
+    background: var(--card-bg); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px; padding: 32px 28px; text-align: center;
+    transition: all 0.4s; position: relative; overflow: hidden;
+  }
+  .compliance-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(245,197,24,0.06), transparent 70%);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .compliance-card:hover::after { opacity: 1; }
+  .compliance-card:hover { transform: translateY(-6px); border-color: rgba(245,197,24,0.3); }
+  .compliance-num {
+    font-family: 'Bebas Neue'; font-size: 3.5rem; line-height: 1;
+    background: linear-gradient(135deg, var(--gold), var(--red));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 8px;
+  }
+  .compliance-label { font-size: 0.9rem; color: var(--light-gray); margin-bottom: 6px; }
+  .compliance-sub { font-size: 0.75rem; color: rgba(176,184,200,0.6); letter-spacing: 1px; }
+
+  /* ========= MODAL ========= */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 9000;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal-box {
+    background: var(--card-bg); border: 1px solid rgba(245,197,24,0.25);
+    border-radius: 8px; max-width: 640px; width: 90%;
+    max-height: 85vh; overflow-y: auto;
+    transform: scale(0.9); transition: transform 0.3s;
+    position: relative;
+  }
+  .modal-overlay.open .modal-box { transform: scale(1); }
+  .modal-header {
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gold); }
+  .modal-close {
+    background: none; border: none; color: var(--light-gray);
+    font-size: 1.5rem; cursor: pointer; line-height: 1; transition: color 0.3s;
+  }
+  .modal-close:hover { color: var(--red); }
+  .modal-body { padding: 28px 32px; }
+  .modal-field { margin-bottom: 20px; }
+  .modal-field label { display: block; font-size: 0.7rem; color: var(--cyan); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .modal-field p { font-size: 1rem; color: var(--white); line-height: 1.6; }
+  .modal-badge-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+  .modal-badge {
+    padding: 8px 20px; border-radius: 20px; font-size: 0.8rem;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .modal-badge.red { background: rgba(215,43,43,0.15); color: var(--red); border: 1px solid rgba(215,43,43,0.3); }
+  .modal-badge.gold { background: rgba(245,197,24,0.1); color: var(--gold); border: 1px solid rgba(245,197,24,0.3); }
+  .modal-badge.green { background: rgba(0,200,100,0.1); color: #00C864; border: 1px solid rgba(0,200,100,0.3); }
+
+  /* ========= FOOTER ========= */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(245,197,24,0.1);
+    padding: 60px 60px 40px;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
+  .footer-brand { }
+  .footer-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .footer-logo img { height: 60px; border-radius: 50%; border: 2px solid rgba(245,197,24,0.4); }
+  .footer-logo-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); }
+  .footer-desc { font-size: 0.95rem; color: var(--light-gray); line-height: 1.8; font-style: italic; }
+  .footer-col h4 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1rem; margin-bottom: 20px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a { color: var(--light-gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+  .footer-col a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 28px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: var(--light-gray); }
+  .footer-reg { font-size: 0.75rem; color: rgba(176,184,200,0.5); text-align: right; }
+
+  /* decorative */
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(245,197,24,0.4), transparent); margin: 0 auto; max-width: 1200px; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-content { grid-template-columns: 1fr; gap: 40px; }
+    .hero-logo-3d { order: -1; }
+    .logo-container { width: 240px; height: 240px; }
+    .logo-img { width: 180px; height: 180px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-top { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+
+  /* 3D card tilt effect via JS */
+  .cert-card { transform-style: preserve-3d; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="data:image/jpeg;base64,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" alt="Allah Waly Foods Logo" onerror="this.src=''; this.style.background='#D72B2B'; this.style.display='block';">
+    <div class="nav-brand">Allah Waly Foods <span>Private Limited</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#certificates">Credentials</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#compliance">Compliance</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="hero-badge">&#9733; Established 2023 · SECP Registered</span>
+      <h1 class="hero-title">Allah Waly Foods</h1>
+      <div class="hero-subtitle">Private Limited</div>
+      <p class="hero-desc">A premier institutional catering company delivering excellence across Pakistan's most prestigious educational and defence institutions — with integrity, quality, and professionalism at our core.</p>
+      <div class="hero-btns">
+        <a href="#certificates" class="btn-primary">View Credentials</a>
+        <a href="#experience" class="btn-outline">Our Journey</a>
+      </div>
+    </div>
+    <div class="hero-logo-3d">
+      <div class="logo-container">
+        <div class="logo-ring"></div>
+        <div class="logo-ring-2"></div>
+        <div class="logo-glow"></div>
+        <img src="data:image/jpeg;base64,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" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num" data-target="5">0</span>
+      <span class="stat-label">Years of Service</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="4">0</span>
+      <span class="stat-label">Canteens Operated</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="6">0</span>
+      <span class="stat-label">Institutions Served</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="100">0</span>
+      <span class="stat-label">% Quality Commitment</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <span class="section-tag">Who We Are</span>
+      <h2 class="section-title">Serving Excellence <span class="accent">Since 2019</span></h2>
+      <p class="section-desc">Allah Waly Foods (Pvt.) Ltd. is a fully registered and compliant catering company operating across prestigious defence, government, and educational institutions throughout Pakistan. Founded by Mr. Muhammad Nadeem, the company has built a reputation for quality, hygiene, and reliable service delivery.</p>
+    </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="about-card-icon">🏛️</div>
+        <h3>Institutional Focus</h3>
+        <p>Specialized in large-scale catering for universities, training institutes, and defence establishments.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">✅</div>
+        <h3>Fully Compliant</h3>
+        <p>SECP registered, FBR enrolled, PRA certified, and PFA licensed — all regulatory requirements met.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🍽️</div>
+        <h3>Quality Food</h3>
+        <p>Commended by every client for quality food, clean arrangements, and professional staff conduct.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">📋</div>
+        <h3>Documented Track Record</h3>
+        <p>Multiple performance certificates from top-tier institutions attesting to consistent excellence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <div class="cert-header">
+    <span class="section-tag">Legal & Regulatory</span>
+    <h2 class="section-title">Company <span class="accent">Credentials</span></h2>
+    <p class="section-desc">All registrations, licenses, and certifications maintained current with regulatory authorities across Pakistan.</p>
+    <div class="cert-filter">
+      <button class="filter-btn active" onclick="filterCerts('all', this)">All Documents</button>
+      <button class="filter-btn" onclick="filterCerts('legal', this)">Legal</button>
+      <button class="filter-btn" onclick="filterCerts('tax', this)">Tax</button>
+      <button class="filter-btn" onclick="filterCerts('license', this)">Licenses</button>
+      <button class="filter-btn" onclick="filterCerts('experience', this)">Experience</button>
+    </div>
+  </div>
+
+  <div class="cert-grid" id="certGrid">
+
+    <!-- SECP Incorporation -->
+    <div class="cert-card gold-accent" data-cat="legal" onclick="openModal('secp')">
+      <div class="cert-card-header">
+        <div class="cert-icon gold">🏢</div>
+        <div class="cert-meta">
+          <h3>Certificate of Incorporation</h3>
+          <span>SECP · Companies Act 2017</span>
+        </div>
+        <span class="cert-status valid">Valid</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-row"><span class="cert-key">Company</span><span class="cert-val">Allah Waly Foods (Pvt.) Ltd.</span></div>
+        <div class="cert-row"><span class="cert-key">Corp. ID No.</span><span class="cert-val">0232514</span></div>
+        <div class="cert-row"><span class="cert-key">Incorporated</span><span class="cert-val">15 June 2023</span></div>
+        <div class="cert-row"><span class="cert-key">Issued At</span><span class="cert-val">Lahore</span></div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-issuer">Securities & Exchange Commission of Pakistan</span>
+        <button class="cert-view-btn">View Details →</button>
+      </div>
+    </div>
+
+    <!-- FBR NTN -->
+    <div class="cert-card cyan-accent" data-cat="tax" onclick="openModal('ntn')">
+      <div class="cert-card-header">
+        <div class="cert-icon cyan">📄</div>
+        <div class="cert-meta">
+          <h3>Taxpayer Registration Certificate</h3>
+          <span>FBR · Income Tax Ordinance 2001</span>
+        </div>
+        <span class="cert-status active">Active</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-row"><span class="cert-key">NTN / Reg. No.</span><span class="cert-val">A506379</span></div>
+        <div class="cert-row"><span class="cert-key">Inc. No.</span><span class="cert-val">0232514</span></div>
+        <div class="cert-row"><span class="cert-key">Registered</span><span class="cert-val">15 Jun 2023</span></div>
+        <div class="cert-row"><span class="cert-key">Tax Office</span><span class="cert-val">RTO Sahiwal</span></div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-issuer">Federal Board of Revenue</span>
+        <button class="cert-view-btn">View Details →</button>
+      </div>
+    </div>
+
+    <!-- FBR Beneficial Owner 2026 -->
+    <div class="cert-card cyan-accent" data-cat="tax" onclick="openModal('beneficial2026')">
+      <div class="cert-card-header">
+        <div class="cert-icon cyan">🔏</div>
+        <div class="cert-meta">
+          <h3>Beneficial Owner Confirmation</h3>
+          <span>FBR · Rule 83A(6) · 2026</span>
+        </div>
+        <span class="cert-status active">2026</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-row"><span class="cert-key">Company</span><span class="cert-val">Allah Waly Foods (Pvt.) Ltd.</span></div>
+        <div class="cert-row"><span class="cert-key">NTN</span><span class="cert-val">A506379</span></div>
+        <div class="cert-row"><span class="cert-key">Last Updated</span><span class="cert-val">02 Aug 2025</span></div>
+        <div class="cert-row"><span class="cert-key">Print Date</span><span class="cert-val">27 Mar 2026</span></div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-issuer">Federal Board of Revenue · IRIS</span>
+        <button class="cert-view-btn">View Details →</button>
+      </div>
+    </div>
+
+    <!-- PRA -->
+    <div class="cert-card green-accent" data-cat="tax" onclick="openModal('pra')">
+      <div class="cert-card-header">
+        <div class="cert-icon green">🌿</div>
+        <div class="cert-meta">
+          <h3>PRA Registration Certificate</h3>
+          <span>Punjab Revenue Authority</span>
+        </div>
+        <span class="cert-status active">Active</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-row"><span class="cert-key">PNTN</span><span class="cert-val">A506379-3</span></div>
+        <div class="cert-row"><span class="cert-key">Registered</span><span class="cert-val">22 Oct 2025</span></div>
+        <div class="cert-row"><span class="cert-key">Category</span><span class="cert-val">Withholding Agent / Service Provider</span></div>
+        <div class="cert-row"><span class="cert-key">Commissionerate</span><span class="cert-val">Sahiwal</span></div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-issuer">Punjab Revenue Authority</span>
+        <button class="cert-view-btn">View Details →</button>
+      </div>
+    </div>
+
+    <!-- PFA License -->
+    <div class="cert-card red-accent" data-cat="license" onclick="openModal('pfa')">
+      <div class="cert-card-header">
+        <div class="cert-icon red">🍛</div>
+        <div class="cert-meta">
+          <h3>Food Business License Certificate</h3>
+          <span>Punjab Food Authority · EAT-A</span>
+        </div>
+        <span class="cert-status active">Active</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-row"><span class="cert-key">License No.</span><span class="cert-val">OKR/EAT-A/20645739</span></div>
+        <div class="cert-row"><span class="cert-key">Owner</span><span class="cert-val">Muhammad Nadeem</span></div>
+        <div class="cert-row"><span class="cert-key">Valid Until</span><span class="cert-val">08 Oct 2026</span></div>
+        <div class="cert-row"><span class="cert-key">CNIC</span><span class="cert-val">35301-52939253</span></div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-issuer">Punjab Food Authority</span>
+        <button class="cert-view-btn">View Details →</button>
+      </div>
+    </div>
+
+    <!-- AIT Contract -->
+    <div class="cert-card gold-accent" data-cat="legal" onclick="openModal('ait')">
+      <div class="cert-card-header">
+        <div class="cert-icon gold">📜</div>
+        <div class="cert-meta">
+          <h3>Contract — AIT Complex Rawat</h3>
+          <span>Askari Institute of Technology</span>
+        </div>
+        <span class="cert-status valid">Awarded</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-row"><span class="cert-key">Scope</span><span class="cert-val">4 × Canteens Operation</span></div>
+        <div class="cert-row"><span class="cert-key">Monthly Rent</span><span class="cert-val">Rs. 105,000</span></div>
+        <div class="cert-row"><span class="cert-key">Effective From</span><span class="cert-val">02 Sep 2022</span></div>
+        <div class="cert-row"><span class="cert-key">Case No.</span><span class="cert-val">701/Gen/Adm/AIT</span></div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-issuer">Askari Institute of Technology, Rawat</span>
+        <button class="cert-view-btn">View Details →</button>
+      </div>
+    </div>
+
+    <!-- NUTECH Experience -->
+    <div class="cert-card cyan-accent" data-cat="experience" onclick="openModal('nutech')">
+      <div class="cert-card-header">
+        <div class="cert-icon cyan">🎓</div>
+        <div class="cert-meta">
+          <h3>Performance Certificate — NUTECH</h3>
+          <span>National University of Technology</span>
+        </div>
+        <span class="cert-status active">Ongoing</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-row"><span class="cert-key">Period</span><span class="cert-val">01 Sep 2024 – Present</span></div>
+        <div class="cert-row"><span class="cert-key">Location</span><span class="cert-val">Sector I-12, Islamabad</span></div>
+        <div class="cert-row"><span class="cert-key">Rating</span><span class="cert-val">Excellent / Professional</span></div>
+        <div class="cert-row"><span class="cert-key">Signed By</span><span class="cert-val">Brigadier, Director Admin</span></div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-issuer">National University of Technology</span>
+        <button class="cert-view-btn">View Details →</button>
+      </div>
+    </div>
+
+    <!-- CTTI Experience -->
+    <div class="cert-card green-accent" data-cat="experience" onclick="openModal('ctti')">
+      <div class="cert-card-header">
+        <div class="cert-icon green">🏗️</div>
+        <div class="cert-meta">
+          <h3>Performance Certificate — CTTI</h3>
+          <span>Construction Technology Training Institute</span>
+        </div>
+        <span class="cert-status valid">Completed</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-row"><span class="cert-key">Period</span><span class="cert-val">30 Sep 2020 – 30 Mar 2025</span></div>
+        <div class="cert-row"><span class="cert-key">Location</span><span class="cert-val">Karnal Sher Khan Road, I-12</span></div>
+        <div class="cert-row"><span class="cert-key">Duration</span><span class="cert-val">4.5 Years</span></div>
+        <div class="cert-row"><span class="cert-key">Signed By</span><span class="cert-val">Col. Atif Jalil Chaudhry (Retd)</span></div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-issuer">Construction Technology Training Institute</span>
+        <button class="cert-view-btn">View Details →</button>
+      </div>
+    </div>
+
+    <!-- Roots Canteen -->
+    <div class="cert-card red-accent" data-cat="experience" onclick="openModal('roots')">
+      <div class="cert-card-header">
+        <div class="cert-icon red">🥗</div>
+        <div class="cert-meta">
+          <h3>Experience Certificate — Roots Canteen</h3>
+          <span>Askari-10, Rawalpindi</span>
+        </div>
+        <span class="cert-status valid">Completed</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-row"><span class="cert-key">Role</span><span class="cert-val">Manager / Contractor</span></div>
+        <div class="cert-row"><span class="cert-key">Period</span><span class="cert-val">2019</span></div>
+        <div class="cert-row"><span class="cert-key">Signed By</span><span class="cert-val">Maj. Qazi Taskeen Rauf (Retd)</span></div>
+        <div class="cert-row"><span class="cert-key">Remarks</span><span class="cert-val">Excellent — Highly Recommended</span></div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-issuer">DADM Commercial Projects, Askari-10</span>
+        <button class="cert-view-btn">View Details →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE TIMELINE -->
+<section id="experience">
+  <div class="exp-inner">
+    <div class="exp-header">
+      <span class="section-tag">Track Record</span>
+      <h2 class="section-title">Our <span class="accent">Journey</span></h2>
+      <p class="section-desc">A consistent record of catering excellence across Pakistan's premier institutions, spanning over half a decade.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <span class="timeline-period">2019</span>
+          <div class="timeline-title">Roots Canteen — Askari-10, Rawalpindi</div>
+          <div class="timeline-org">Defence Authority — DADM Commercial Projects</div>
+          <div class="timeline-desc">Managed canteen operations for Askari-10 colony residents, students, and staff. Built a strong reputation for quality food and professional service in a high-security environment.</div>
+          <div class="timeline-tags"><span class="tag">Defence</span><span class="tag">Food Service</span><span class="tag">Management</span></div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <span class="timeline-period">Sep 2020 – Mar 2025 · 4.5 Years</span>
+          <div class="timeline-title">CTTI Catering Contract — Islamabad</div>
+          <div class="timeline-org">Construction Technology Training Institute</div>
+          <div class="timeline-desc">Long-term catering services at Karnal Sher Khan Road facility. Recognized for consistent quality, cleanliness, and professional staff conduct throughout the engagement.</div>
+          <div class="timeline-tags"><span class="tag">Training Institute</span><span class="tag">Long-Term</span><span class="tag">Islamabad</span></div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <span class="timeline-period">Sep 2022 – Present</span>
+          <div class="timeline-title">AIT Complex Rawat — 4 Canteens</div>
+          <div class="timeline-org">Askari Institute of Technology, Rawalpindi</div>
+          <div class="timeline-desc">Awarded contract for operation of 4 canteens at AIT Complex at Rs. 105,000/month. Formal contract agreement signed in September 2022 following competitive quotation process.</div>
+          <div class="timeline-tags"><span class="tag">Multi-Canteen</span><span class="tag">Defence Institute</span><span class="tag">Rawat</span></div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <span class="timeline-period">Jun 2023 · Company Incorporated</span>
+          <div class="timeline-title">SECP Registration — Allah Waly Foods (Pvt.) Ltd.</div>
+          <div class="timeline-org">Securities & Exchange Commission of Pakistan</div>
+          <div class="timeline-desc">Formally incorporated under the Companies Act 2017 with Corporate ID No. 0232514, transitioning from sole proprietorship to a registered private limited company.</div>
+          <div class="timeline-tags"><span class="tag">SECP</span><span class="tag">Pvt. Ltd.</span><span class="tag">Lahore</span></div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <span class="timeline-period">Sep 2024 – Present · Ongoing</span>
+          <div class="timeline-title">NUTECH Catering Services — Islamabad</div>
+          <div class="timeline-org">National University of Technology</div>
+          <div class="timeline-desc">Currently providing catering services at NUTECH, Sector I-12, Islamabad. Rated excellent by the Brigadier Director Admin for food quality, cleanliness, and timely service delivery.</div>
+          <div class="timeline-tags"><span class="tag">University</span><span class="tag">Active</span><span class="tag">Islamabad</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPLIANCE -->
+<section id="compliance">
+  <div class="compliance-inner">
+    <div class="compliance-header">
+      <span class="section-tag">Regulatory Standing</span>
+      <h2 class="section-title">Full <span class="accent">Compliance</span></h2>
+      <p class="section-desc">Registered and active with all relevant regulatory bodies — ensuring full legal and fiscal compliance at every level of operation.</p>
+    </div>
+    <div class="compliance-grid">
+      <div class="compliance-card">
+        <div class="compliance-num">SECP</div>
+        <div class="compliance-label">Companies Act 2017</div>
+        <div class="compliance-sub">Corp. ID · 0232514 · Incorporated 15 Jun 2023</div>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-num">FBR</div>
+        <div class="compliance-label">NTN Registered</div>
+        <div class="compliance-sub">A506379 · Federal Board of Revenue · Active Filer</div>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-num">PRA</div>
+        <div class="compliance-label">Punjab Revenue Authority</div>
+        <div class="compliance-sub">PNTN A506379-3 · Withholding Agent · Active</div>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-num">PFA</div>
+        <div class="compliance-label">Food Business License</div>
+        <div class="compliance-sub">OKR/EAT-A/20645739 · EAT-A · Valid 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#D72B2B,#8B0000);display:flex;align-items:center;justify-content:center;font-size:1.6rem;border:2px solid rgba(245,197,24,0.4);">🍽️</div>
+          <div class="footer-logo-text">Allah Waly Foods (Pvt.) Ltd.</div>
+        </div>
+        <p class="footer-desc">Delivering institutional catering excellence across Pakistan's most prestigious establishments — with an unwavering commitment to quality, hygiene, and professionalism.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#certificates">Credentials</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#compliance">Compliance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Registration Details</h4>
+        <ul>
+          <li><a href="#">SECP: 0232514</a></li>
+          <li><a href="#">NTN: A506379</a></li>
+          <li><a href="#">PRA PNTN: A506379-3</a></li>
+          <li><a href="#">PFA: OKR/EAT-A/20645739</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Allah Waly Foods (Private) Limited. All rights reserved.</p>
+      <p class="footer-reg">House No 3, Line No 1, Hari Chand Wala, Depalpur, Okara · RTO Sahiwal</p>
+    </div>
+  </div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Certificate Details</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 80);
+  });
+
+  // Counter animation
+  function animateCounters() {
+    document.querySelectorAll('[data-target]').forEach(el => {
+      const target = +el.dataset.target;
+      const suffix = el.dataset.target == 100 ? '%' : '+';
+      let count = 0;
+      const step = target / 40;
+      const timer = setInterval(() => {
+        count = Math.min(count + step, target);
+        el.textContent = Math.floor(count) + (count >= target ? suffix : '');
+        if (count >= target) clearInterval(timer);
+      }, 40);
+    });
+  }
+  const statsObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCounters(); statsObs.disconnect(); }});
+  }, { threshold: 0.5 });
+  document.querySelector('.stats-bar') && statsObs.observe(document.querySelector('.stats-bar'));
+
+  // Card 3D tilt
+  document.querySelectorAll('.cert-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(800px) rotateY(${x*12}deg) rotateX(${-y*8}deg) translateY(-8px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  // Filter
+  function filterCerts(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.cert-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+
+  // Modal data
+  const modals = {
+    secp: {
+      title: 'Certificate of Incorporation — SECP',
+      body: `<div class="modal-field"><label>Issuing Authority</label><p>Securities and Exchange Commission of Pakistan (SECP) — Company Registration Office</p></div>
+             <div class="modal-field"><label>Company Name</label><p>Allah Waly Foods (Private) Limited</p></div>
+             <div class="modal-field"><label>Corporate Unique ID</label><p>0232514</p></div>
+             <div class="modal-field"><label>Date of Incorporation</label><p>15 June 2023 — Lahore</p></div>
+             <div class="modal-field"><label>Type</label><p>Private Limited — Limited by Shares</p></div>
+             <div class="modal-field"><label>Statutory Reference</label><p>Section 16 of the Companies Act, 2017 (XIX of 2017)</p></div>
+             <div class="modal-field"><label>Signed By</label><p>Tariq Rasheed — Deputy Registrar</p></div>
+             <div class="modal-badge-row"><span class="modal-badge green">✓ Verified</span><span class="modal-badge gold">SECP Registered</span></div>`
+    },
+    ntn: {
+      title: 'FBR Taxpayer Registration Certificate',
+      body: `<div class="modal-field"><label>Registration No. (NTN)</label><p>A506379</p></div>
+             <div class="modal-field"><label>Company Name</label><p>Allah Waly Foods (Private) Limited</p></div>
+             <div class="modal-field"><label>Incorporation No.</label><p>0232514</p></div>
+             <div class="modal-field"><label>Date of Registration</label><p>15 June 2023</p></div>
+             <div class="modal-field"><label>Type of Person</label><p>Company</p></div>
+             <div class="modal-field"><label>Address</label><p>House No 3, Line No 1, Hari Chand Wala, Post Office Depalpur, Okara</p></div>
+             <div class="modal-field"><label>Tax Office</label><p>RTO Sahiwal</p></div>
+             <div class="modal-field"><label>Activity Type</label><p>Business</p></div>
+             <div class="modal-badge-row"><span class="modal-badge green">✓ Active</span><span class="modal-badge gold">FBR Enrolled</span></div>`
+    },
+    beneficial2026: {
+      title: 'FBR Beneficial Owner Confirmation 2026',
+      body: `<div class="modal-field"><label>Certificate Type</label><p>Certificate of Confirmation in Respect of Beneficial Owner — Rule 83A(6) of Income Tax Rules, 2002</p></div>
+             <div class="modal-field"><label>Company</label><p>Allah Waly Foods (Private) Limited</p></div>
+             <div class="modal-field"><label>NTN</label><p>A506379</p></div>
+             <div class="modal-field"><label>Statutory Reference</label><p>Section 181E of the Income Tax Ordinance, 2001</p></div>
+             <div class="modal-field"><label>Last Beneficial Owner Update</label><p>02 August 2025</p></div>
+             <div class="modal-field"><label>Certificate Covers</label><p>Year 2026 — Beneficial owner particulars remain unchanged</p></div>
+             <div class="modal-field"><label>Date of Print</label><p>27 March 2026</p></div>
+             <div class="modal-badge-row"><span class="modal-badge green">✓ 2026 Compliant</span><span class="modal-badge gold">Computer Generated</span></div>`
+    },
+    pra: {
+      title: 'PRA Registration Certificate',
+      body: `<div class="modal-field"><label>Issuing Authority</label><p>Punjab Revenue Authority (PRA) — Gateway to Development</p></div>
+             <div class="modal-field"><label>PNTN</label><p>A506379-3</p></div>
+             <div class="modal-field"><label>Registration No.</label><p>A506379</p></div>
+             <div class="modal-field"><label>Company Name</label><p>Allah Waly Foods (Private) Limited</p></div>
+             <div class="modal-field"><label>Business Name</label><p>Allah Waly Food (Private) Limited</p></div>
+             <div class="modal-field"><label>Category</label><p>Withholding Agent / Service Provider</p></div>
+             <div class="modal-field"><label>Date of Registration</label><p>22 October 2025</p></div>
+             <div class="modal-field"><label>Principal Activity</label><p>9998.0000 — Other Services</p></div>
+             <div class="modal-field"><label>Commissionerate</label><p>Sahiwal Commissionerate</p></div>
+             <div class="modal-field"><label>Status</label><p>Active (as on 22 Oct 2025)</p></div>
+             <div class="modal-badge-row"><span class="modal-badge green">✓ Active</span><span class="modal-badge red">Punjab PRA</span></div>`
+    },
+    pfa: {
+      title: 'Punjab Food Authority — Food Business License',
+      body: `<div class="modal-field"><label>Issuing Authority</label><p>Punjab Food Authority — پنجاب فوڈ اتھارٹی</p></div>
+             <div class="modal-field"><label>License Number</label><p>OKR/EAT-A/20645739</p></div>
+             <div class="modal-field"><label>Business Name</label><p>Allah Walay Food</p></div>
+             <div class="modal-field"><label>Owner Name</label><p>Muhammad Nadeem</p></div>
+             <div class="modal-field"><label>CNIC</label><p>35301-52939253</p></div>
+             <div class="modal-field"><label>Business Address</label><p>Superior College Canteen, Okara Road OPP Grid Station, Depalpur, Okara</p></div>
+             <div class="modal-field"><label>License Duration</label><p>09 October 2025 to 08 October 2026</p></div>
+             <div class="modal-field"><label>License Category</label><p>EAT-A</p></div>
+             <div class="modal-field"><label>Statutory Reference</label><p>Punjab Food Authority Act 2011, Section 15</p></div>
+             <div class="modal-badge-row"><span class="modal-badge green">✓ Valid till Oct 2026</span><span class="modal-badge red">PFA Licensed</span></div>`
+    },
+    ait: {
+      title: 'Contract — AIT Complex Rawat (4 Canteens)',
+      body: `<div class="modal-field"><label>Issuing Authority</label><p>Askari Institute of Technology, Opposite Old Police Station, GT Road, Rawat, Rawalpindi</p></div>
+             <div class="modal-field"><label>Subject</label><p>Award & Contract Agreement — Operation of 4 × Canteens at AIT Complex Rawat</p></div>
+             <div class="modal-field"><label>Contractor</label><p>Mr. Muhammad Nadeem, Resident of Harri Jandwala, Post Office Depal Pur, Tehsil Dipalpur & Distt. Okara</p></div>
+             <div class="modal-field"><label>Monthly Rent</label><p>Rs. 105,000.00 per month</p></div>
+             <div class="modal-field"><label>Effective Date</label><p>02 September 2022</p></div>
+             <div class="modal-field"><label>Case No.</label><p>701/Gen/Adm/AIT</p></div>
+             <div class="modal-field"><label>Awarded By</label><p>Lt. Col. Qurban Ahmad (Retd.) — For Director QA & AIT</p></div>
+             <div class="modal-badge-row"><span class="modal-badge green">✓ Contract Awarded</span><span class="modal-badge gold">Defence Establishment</span></div>`
+    },
+    nutech: {
+      title: 'Performance & Experience Certificate — NUTECH',
+      body: `<div class="modal-field"><label>Issuing Institution</label><p>National University of Technology (NUTECH) — Main IJP Road, Sector I-12, Islamabad</p></div>
+             <div class="modal-field"><label>Certificate For</label><p>Mr. Muhammad Nadeem s/o Muhammad Asif — CNIC: 35301-5293925-3</p></div>
+             <div class="modal-field"><label>Company</label><p>M/s Allah Walay Foods Pvt. Ltd.</p></div>
+             <div class="modal-field"><label>Service Period</label><p>01 September 2024 to date (Ongoing)</p></div>
+             <div class="modal-field"><label>Service Location</label><p>NUTECH, Karnal Sher Khan Road, Sector I-12, Islamabad</p></div>
+             <div class="modal-field"><label>Performance Assessment</label><p>Quality food, neat and clean arrangements, well-mannered and cooperative staff, timely service delivery. Performance remained consistent and met institutional standards throughout.</p></div>
+             <div class="modal-field"><label>Signed By</label><p>Brigadier — Director Admin, National University of Technology</p></div>
+             <div class="modal-badge-row"><span class="modal-badge green">✓ Ongoing</span><span class="modal-badge gold">Excellent Rating</span></div>`
+    },
+    ctti: {
+      title: 'Performance & Experience Certificate — CTTI',
+      body: `<div class="modal-field"><label>Issuing Institution</label><p>Construction Technology Training Institute (CTTI) — Karnal Sher Khan Road, I-12, Islamabad</p></div>
+             <div class="modal-field"><label>Certificate For</label><p>Mr. Muhammad Nadeem S/O Muhammad Asif — CNIC: 35301-5293925-3</p></div>
+             <div class="modal-field"><label>Company</label><p>M/s Allah Waly Foods Pvt. Ltd.</p></div>
+             <div class="modal-field"><label>Service Period</label><p>30 September 2020 to 30 March 2025 (4.5 Years)</p></div>
+             <div class="modal-field"><label>Performance Assessment</label><p>Professional and satisfactory catering facilities. Quality food, neat and clean arrangements, well-mannered and cooperative staff, timely service delivery. Consistent performance throughout.</p></div>
+             <div class="modal-field"><label>Signed By</label><p>Colonel Atif Jalil Chaudhry (Retired) — Director CTTI, 30 March 2025</p></div>
+             <div class="modal-badge-row"><span class="modal-badge gold">✓ 4.5 Years Service</span><span class="modal-badge green">Completed Successfully</span></div>`
+    },
+    roots: {
+      title: 'Experience Certificate — Roots Canteen Askari-10',
+      body: `<div class="modal-field"><label>Issuing Authority</label><p>DADM (Commercial Projects) — Askari-10, Rawalpindi</p></div>
+             <div class="modal-field"><label>Certificate For</label><p>Mr. Muhammad Nadeem Son of Muhammad Asif — CNIC: 35301-5293925-3</p></div>
+             <div class="modal-field"><label>Role</label><p>Manager — Roots Canteen, Askari-10, Rawalpindi</p></div>
+             <div class="modal-field"><label>Period</label><p>2019</p></div>
+             <div class="modal-field"><label>Performance Remarks</label><p>Excellent duties as Manager. Professional expertise in food business — attracted good clientele, enjoyed good reputation among students, staff, and colony residents. Provided quality food with innovation and taste. Dutiful, responsible, and maintained clean environments.</p></div>
+             <div class="modal-field"><label>Signed By</label><p>Maj. Qazi Taskeen Rauf (Retd.) — DADM Commercial Projects, 04 March 2020</p></div>
+             <div class="modal-badge-row"><span class="modal-badge gold">✓ Excellent Rating</span><span class="modal-badge red">Defence Establishment</span></div>`
+    }
+  };
+
+  function openModal(key) {
+    const data = modals[key];
+    if (!data) return;
+    document.getElementById('modal-title').textContent = data.title;
+    document.getElementById('modal-body').innerHTML = data.body;
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (!e || e.target === document.getElementById('modal') || e.target.classList.contains('modal-close')) {
+      document.getElementById('modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Scroll reveal
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.cert-card, .compliance-card, .about-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    revealObs.observe(el);
+  });
+</script>
+</body>
+</html>
